@@ -1,0 +1,5 @@
+name: Heads
+version: '${project.version}'
+main: me.black_lottus.heads.Heads
+authors: [ Black_Lottus ]
+description: Plugin to find heads and save data!

@@ -1,0 +1,46 @@
+##                                                                                   ##
+##         _       ______   _______   _______   _    _    _____      __  __          ##
+##        | |     |  __  | |__   __| |__   __| | |  | |  / ____|    /  \/  \         ##
+##        | |     | |  | |    | |       | |    | |  | |  | |_      |  _  _  |        ##
+##        | |     | |  | |    | |       | |    | |  | |  \____ \    \ \\// /         ##
+##        | |____ | |__| |    | |       | |    | |__| |    ___| |    \ \/ /          ##
+##        |_____/ |______|    |_|       |_|    |______|  |_____/      \__/           ##
+##                                                                                   ##
+##                      -------------------------------------                        ##
+##                        Plugin created by Black_Lottus.                            ##
+##                      -------------------------------------                        ##
+
+####################################################
+###            CONFIGURATION VERSION             ###
+####################################################
+#This version is the configuration version, not the plugin version.
+#Don't edit this if you don't know what are you doing!
+version: 1.5.1 ALPHA
+
+
+####################################################
+###               STORAGE SETTINGS               ###
+####################################################
+#Available storages: mysql, file
+#Defaults always get the file storage!
+storage-mode: file
+
+mysql-database:
+  host: 127.0.0.1
+  port: 3306
+  database: staff
+  username: Black
+  password: black_lottus
+
+####################################################
+###                  CLAN BASICS                 ###
+####################################################
+clan:
+  max-characters: 12
+  min-characters: 4
+
+####################################################
+###                  PERMISSIONS                 ###
+####################################################
+permissions:
+  use: "heads.use"

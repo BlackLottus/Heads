@@ -1,0 +1,30 @@
+##                                                                                   ##
+##         _       ______   _______   _______   _    _    _____      __  __          ##
+##        | |     |  __  | |__   __| |__   __| | |  | |  / ____|    /  \/  \         ##
+##        | |     | |  | |    | |       | |    | |  | |  | |_      |  _  _  |        ##
+##        | |     | |  | |    | |       | |    | |  | |  \____ \    \ \\// /         ##
+##        | |____ | |__| |    | |       | |    | |__| |    ___| |    \ \/ /          ##
+##        |_____/ |______|    |_|       |_|    |______|  |_____/      \__/           ##
+##                                                                                   ##
+##                      -------------------------------------                        ##
+##                        Plugin created by Black_Lottus.                            ##
+#                       -------------------------------------
+#
+####################################
+##        STORAGE MESSAGES        ##
+####################################
+selected_storage: "You have been selected the storage mode in: &b%mode%"
+none_storage: "None storage mode have been selected in config.yml."
+mysql_error: "&cA error have been occurred when we try to load mysql database!"
+
+####################################
+##             PREFIX             ##
+####################################
+prefix: "&9&lHeads &f>> "
+
+####################################
+##        GENERAL MESSAGES        ##
+####################################
+only_player: "&bEste comando solo los jugadores pueden ejecutarlo."
+only_leader: "Solamente el dueño del clan puede ejecutar este comando."
+no_perms: "No tienes permisos suficientes."
