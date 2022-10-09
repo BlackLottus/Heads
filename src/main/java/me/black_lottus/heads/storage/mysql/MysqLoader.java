@@ -4,6 +4,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import me.black_lottus.heads.Heads;
 import me.black_lottus.heads.storage.StorageManager;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 
 
 import java.sql.*;
@@ -12,22 +14,26 @@ import java.util.UUID;
 
 public class MysqLoader implements StorageManager {
 
+    final static String LOCATIONS_DB = "CREATE TABLE IF NOT EXISTS "
+            + "Locations(id INTEGER PRIMARY KEY AUTO_INCREMENT, location VARCHAR(50) NOT NULL UNIQUE)";
+    final static String PLAYER_DB = "CREATE TABLE IF NOT EXISTS "
+            + "Players(id INTEGER PRIMARY KEY AUTO_INCREMENT, uuid VARCHAR(50) NOT NULL UNIQUE, nickname VARCHAR(30) NOT NULL UNIQUE)";
     final static String HEADS_DB = "CREATE TABLE IF NOT EXISTS "
-            + "Heads(id INTEGER PRIMARY KEY AUTO_INCREMENT, uuid VARCHAR(50) NOT NULL UNIQUE, nickname VARCHAR(30) NOT NULL UNIQUE, clan VARCHAR(20), joined_date TIMESTAMP)";
+            + "Heads(id INTEGER PRIMARY KEY AUTO_INCREMENT, uuid VARCHAR(50), headID INTEGER)";
 
-    final static String LIST_CLANS = "SELECT * FROM DC_Clans;";
-    final static String LIST_PCLANS = "SELECT * FROM DC_Users;";
-    final static String LIST_HOMES = "SELECT b.id,clan,world,x,y,z,pitch,yaw FROM DC_Bases b, DC_Clans c WHERE c.id = b.id;";
-    final static String INSERT_CLAN = "INSERT INTO DC_Clans(clan, leader, have_password, password, ff, created_date) " +
-            "VALUES (?,?,?,?,?,?) ON DUPLICATE KEY UPDATE clan=?,leader=?,have_password=?,password=?,ff=?,created_date=?;";
-    final static String INSERT_USER = "INSERT INTO DC_Users(uuid, nickname, clan, joined_date) " +
-            "VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE uuid=?,nickname=?,clan=?,joined_date=?;";
-    final static String INSERT_HOME = "INSERT INTO DC_Bases(id, world, x, y, z, pitch, yaw) " +
-            "VALUES (?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE id=?,world=?,x=?,y=?,z=?,pitch=?,yaw=?;";
+    final static String COUNT_HEADS = "SELECT COUNT(*) FROM Heads WHERE uuid=?";
+    final static String LIST_LOCATIONS = "SELECT * FROM Locations";
 
-    final static String DELETE_CLAN = "DELETE FROM DC_Clans WHERE id = ?";
-    final static String DELETE_USER = "DELETE FROM DC_Users WHERE uuid = ?";
-    final static String DELETE_HOME = "DELETE FROM DC_Bases WHERE id = ?";
+    final static String INSERT_LOCATION = "INSERT IGNORE INTO Locations(location) " +
+            "VALUES (?);";
+    final static String INSERT_PLAYER = "INSERT IGNORE INTO Players(uuid, nickname) " +
+            "VALUES (?,?);";
+    final static String INSERT_HEAD = "INSERT INTO Heads(uuid, headID) " +
+            "VALUES (?,?);";
+
+    final static String DELETE_LOCATION = "DELETE FROM Locations WHERE id = ?";
+    final static String DELETE_PLAYER = "DELETE FROM Players WHERE uuid = ?";
+    final static String DELETE_HEAD = "DELETE FROM Heads WHERE id = ? AND uuid = ?";
 
     private final HikariDataSource source;
 
@@ -68,7 +74,7 @@ public class MysqLoader implements StorageManager {
     /***************************************/
 
     private void createDB(){
-        create(HEADS_DB);
+        create(HEADS_DB); create(PLAYER_DB); create(LOCATIONS_DB);
     }
 
     private void create(String sentence){
@@ -84,22 +90,108 @@ public class MysqLoader implements StorageManager {
     /***************************************/
 
     @Override
-    public HashMap<UUID, Integer> listPlayers() {
-        return null;
+    public HashMap<Location, Integer> listLocations() {
+        HashMap<Location, Integer> locations = new HashMap<>();
+
+        try (Connection connection = source.getConnection();
+             PreparedStatement pr = connection.prepareStatement(LIST_LOCATIONS)){
+            ResultSet r = pr.executeQuery();
+            while (r.next()) {
+                Location loc = stringToLocation(r.getString("location"));
+                locations.put(loc,r.getInt("id"));
+            }
+            r.close();
+        }
+        catch (Exception e) {e.printStackTrace();}
+        return locations;
     }
 
     @Override
-    public void savePlayer(UUID uuid) {
-
+    public Integer getHeads(UUID uuid) {
+        int heads = 0;
+        try (Connection connection = source.getConnection();
+             PreparedStatement pr = connection.prepareStatement(COUNT_HEADS)){
+            pr.setString(1, uuid.toString());
+            ResultSet r = pr.executeQuery();
+            if(r.next()) heads = r.getInt(1);
+            r.close();
+        }
+        catch (Exception e) {e.printStackTrace();}
+        return heads;
     }
 
     @Override
-    public void deletePlayer(UUID uuid) {
-
+    public void addLocation(Location loc) {
+        try (Connection connection = source.getConnection();
+             PreparedStatement pr = connection.prepareStatement(INSERT_LOCATION)){
+            pr.setString(1, stringFromLocation(loc));
+            pr.execute();
+        }
+        catch (Exception e) {e.printStackTrace();}
     }
 
     @Override
-    public int getPlayerHeads(UUID uuid) {
-        return 0;
+    public void addHead(UUID uuid, Integer id) {
+        try (Connection connection = source.getConnection();
+             PreparedStatement pr = connection.prepareStatement(INSERT_HEAD)){
+            pr.setString(1, uuid.toString());
+            pr.setInt(2,id);
+            pr.execute();
+        }
+        catch (Exception e) {e.printStackTrace();}
     }
+
+    @Override
+    public void addPlayer(UUID uuid, String nickname) {
+        try (Connection connection = source.getConnection();
+             PreparedStatement pr = connection.prepareStatement(INSERT_PLAYER)){
+            pr.setString(1, uuid.toString());
+            pr.setString(2, nickname);
+            pr.execute();
+        }
+        catch (Exception e) {e.printStackTrace();}
+    }
+
+
+    @Override
+    public void removeHead(Integer id, UUID uuid) {
+        try (Connection connection = source.getConnection();
+             PreparedStatement pr = connection.prepareStatement(DELETE_HEAD)){
+            pr.setInt(1, id);
+            pr.setString(2, uuid.toString());
+            pr.execute();
+        }
+        catch (Exception e) {e.printStackTrace();}
+    }
+
+    @Override
+    public void removePlayer(UUID uuid) {
+        try (Connection connection = source.getConnection();
+             PreparedStatement pr = connection.prepareStatement(DELETE_PLAYER)){
+            pr.setString(1, uuid.toString());
+            pr.execute();
+        }
+        catch (Exception e) {e.printStackTrace();}
+    }
+
+    @Override
+    public void removeLocation(Integer id) {
+        try (Connection connection = source.getConnection();
+             PreparedStatement pr = connection.prepareStatement(DELETE_LOCATION)){
+            pr.setInt(1, id);
+            pr.execute();
+        }
+        catch (Exception e) {e.printStackTrace();}
+    }
+
+
+    private Location stringToLocation(String s){
+        String[] a = s.split(":");
+        return new Location(Bukkit.getWorld(a[0]),Double.parseDouble(a[1]),Double.parseDouble(a[2]),Double.parseDouble(a[3]));
+    }
+
+    private String stringFromLocation(Location loc){
+        return  loc.getWorld().getName() + ":" + loc.getBlockX() + ":" + loc.getBlockY() + ":" + loc.getBlockZ();
+    }
+
 }

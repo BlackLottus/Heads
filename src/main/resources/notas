@@ -1,0 +1,35 @@
+
+
+    |----------------------------------------|   |------------------------------|   |------------------------------|
+    |             PLAYER DATABASE            |   |        HEADS DATABASE        |   |      REFERENCE DATABASE      |
+    |----------------------------------------|   |------------------------------|   |------------------------------|
+    |   id   |    uuid    |     username     |   |   id   |     location        |   |    PLAYER    |     HEAD      |
+    |   1    | 3a234vassd |   Black_Lottus   |   |   1    |    23.5x 55y 33z    |   | Black_Lottus |      1        |
+    |   2    | 1ba5huzxxx |      Konkuo      |   |   2    |    21.5x 21y 17z    |   |    Konkuo    |      2        |
+    |        |            |                  |   |        |                     |   |    Konkuo    |      1        |
+    |----------------------------------------|   |------------------------------|   |------------------------------|
+
+
+==================
+ COSAS QUE FALTAN
+==================
+- Evento de Click. (Para la Wand y sin Wand)
+- Animaciones de las cabezas
+- Sonidos, Titles, Efectos.
+- Filter Material --> Que no sea solo cabezas.
+
+
+
+=================
+   WORKING ON
+=================
+- CMD (HEADS).
+
+
+
+=================
+     ERRORES
+=================
+- En el storage hay que cambiar la "id" y poner que las cabezas tengan ID propia.
+- Error en FileStorage (Eliminar una head a un jugador)
+- Base de datos HEADS, Chequeos para que no se dupliquen filas.

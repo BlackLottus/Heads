@@ -26,5 +26,15 @@ prefix: "&9&lHeads &f>> "
 ##        GENERAL MESSAGES        ##
 ####################################
 only_player: "&bEste comando solo los jugadores pueden ejecutarlo."
-only_leader: "Solamente el dueño del clan puede ejecutar este comando."
 no_perms: "No tienes permisos suficientes."
+
+####################################
+##          HELP MESSAGE          ##
+####################################
+help_message:
+  - "&c/heads wand &8: &fObtener la varita de configuración."
+  - "&c/heads add <id> &8: &fAñade una nueva cabeza."
+  - "&c/heads remove <id> &8: &fElimina la cabeza seleccionada."
+  - "&c/heads list &8: &fMuestra todas las cabezas y su ubicación."
+  - "&c/heads help &8: &fMuestra los comandos disponibles."
+  - "&c/heads removeData &9<player> &8: &fElimina los datos del jugador."
