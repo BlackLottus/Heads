@@ -26,7 +26,7 @@ public class HelpCMD extends CommandInterface {
     public String[] aliases() { return new String[0]; }
 
     @Override
-    public String permission() { return Permissions.USE_PERM; }
+    public String permission() { return Permissions.ADMIN_PERM; }
 
     @Override
     public Integer[] length() { return new Integer[]{1}; }

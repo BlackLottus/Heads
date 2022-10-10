@@ -1,6 +1,7 @@
 package me.black_lottus.heads;
 
 import me.black_lottus.heads.commands.HeadsManager;
+import me.black_lottus.heads.data.Data;
 import me.black_lottus.heads.data.Permissions;
 import me.black_lottus.heads.file.Files;
 import me.black_lottus.heads.listener.PlayerListener;
@@ -22,10 +23,11 @@ public final class Heads extends JavaPlugin {
         saveDefaultConfig();
         lang = new Files(this, "lang", false, true);
 
-        Permissions.initialize();
-
         StorageLoader.registerLoaders();
         storage = StorageLoader.getAvailableLoader();
+
+        Permissions.initialize();
+        Data.initialize();
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), instance);
 

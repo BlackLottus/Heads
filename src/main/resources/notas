@@ -13,23 +13,21 @@
 ==================
  COSAS QUE FALTAN
 ==================
-- Evento de Click. (Para la Wand y sin Wand)
 - Animaciones de las cabezas
 - Sonidos, Titles, Efectos.
 - Filter Material --> Que no sea solo cabezas.
 
+- Comando o algo para ver las cabezas que tienes en total recogidas.
 
+- Si se elimina una cabeza del sistema. Hacer que si un jugador la tenía recogida, se le elimine.
 
 =================
    WORKING ON
 =================
-- CMD (HEADS).
 
 
 
 =================
      ERRORES
 =================
-- En el storage hay que cambiar la "id" y poner que las cabezas tengan ID propia.
 - Error en FileStorage (Eliminar una head a un jugador)
-- Base de datos HEADS, Chequeos para que no se dupliquen filas.

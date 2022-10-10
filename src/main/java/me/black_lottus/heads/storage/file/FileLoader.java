@@ -26,14 +26,26 @@ public class FileLoader implements StorageManager {
     public HashMap<Location, Integer> listLocations() {
         HashMap<Location, Integer> locations = new HashMap<>();
         for(String key : Objects.requireNonNull(fileConfig.getConfig().getConfigurationSection("locations")).getKeys(false)){
-            Location loc = stringToLocation(fileConfig.get("locations."+key));
+            Location loc = stringToLocation(fileConfig.getWithoutPrefix("locations."+key));
             locations.put(loc,Integer.parseInt(key));
         }
         return locations;
     }
 
     @Override
-    public Integer getHeads(UUID uuid) {
+    public ArrayList<Integer> getPlayerHeads(UUID uuid) {
+        ArrayList<Integer> heads = new ArrayList<>();
+        if(fileConfig.isSet("players."+uuid)){
+            String s = fileConfig.getWithoutPrefix("players."+uuid);
+            for(String st : s.split(":")){
+                heads.add(Integer.parseInt(st));
+            }
+        }
+        return heads;
+    }
+
+    @Override
+    public Integer getTotalHeads(UUID uuid) {
         int heads = 0;
         String[] a = fileConfig.getConfig().getString("players."+ uuid).split(":");
         heads = a.length;
@@ -41,15 +53,7 @@ public class FileLoader implements StorageManager {
     }
 
     @Override
-    public void addLocation(Location loc) {
-        int size, id;
-        if(fileConfig.getConfig().isSet("locations")){
-            size = fileConfig.getConfig().getConfigurationSection("locations").getKeys(false).size();
-            Bukkit.broadcastMessage("Size es: "+size);
-            List<String> str = fileConfig.getConfig().getConfigurationSection("locations").getKeys(false).stream().toList();
-            id = Integer.parseInt(str.get(size-1)) + 1;
-            Bukkit.broadcastMessage("id es: "+id);
-        } else id = 1;
+    public void addLocation(Integer id, Location loc) {
         fileConfig.set("locations."+id, stringFromLocation(loc));
         fileConfig.save();
     }
@@ -58,11 +62,11 @@ public class FileLoader implements StorageManager {
     public void addHead(UUID uuid, Integer id) {
         String s;
         if(fileConfig.getConfig().isSet("players."+ uuid.toString())){
-            s = fileConfig.getConfig().getString("players."+ uuid.toString()) + ":"+id;
+            s = fileConfig.getConfig().getString("players."+ uuid) + ":"+id;
         } else {
             s = ""+id;
         }
-        fileConfig.set("players."+uuid.toString(), s);
+        fileConfig.set("players."+uuid, s);
         fileConfig.save();
     }
 

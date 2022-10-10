@@ -10,27 +10,62 @@
 ##                        Plugin created by Black_Lottus.                            ##
 #                       -------------------------------------
 #
-####################################
-##        STORAGE MESSAGES        ##
-####################################
+##################################################################
+##                       STORAGE MESSAGES                       ##
+##################################################################
 selected_storage: "You have been selected the storage mode in: &b%mode%"
 none_storage: "None storage mode have been selected in config.yml."
 mysql_error: "&cA error have been occurred when we try to load mysql database!"
 
-####################################
-##             PREFIX             ##
-####################################
+##################################################################
+##                            PREFIX                            ##
+##################################################################
 prefix: "&9&lHeads &f>> "
 
-####################################
-##        GENERAL MESSAGES        ##
-####################################
+##################################################################
+##                       GENERAL MESSAGES                       ##
+##################################################################
 only_player: "&bEste comando solo los jugadores pueden ejecutarlo."
 no_perms: "No tienes permisos suficientes."
+collect_head: "Has encontrado una cabeza."
+already_collected: "Ya has encontrado esta cabeza anteriormente."
 
-####################################
-##          HELP MESSAGE          ##
-####################################
+##################################################################
+##                       COMMANDS MESSAGES                      ##
+##################################################################
+# Wand Command
+wand:
+  material: 'STICK'
+  name: "&a&lHeads WAND"
+  lore:
+    - "&8Wand usage"
+    - ""
+    - "&fUtiliza el &aBotón Derecho &fpara"
+    - "&festablecer una nueva posición"
+    - "&fy luego utiliza &b/heads add <id>"
+    - "&fpara guardarla."
+
+already_have_wand: "Ya tienes una Wand en el inventario."
+get_wand: "Has obtenido la varita de configuración."
+cant_use_wand: "No puedes utilizar este item. Lo vamos a eliminar!"
+block_selected: "Seleccionado el Bloque: %X%x %Y%y %Z%z"
+
+# Add Heads Command
+id_already_exists: "Esta ID ya existe. Utiliza otra."
+coord_already_exists: "Esta cordenada ya existe. Con la id: %id%"
+coord_added: "Coordenada guardada."
+not_coord_set: "No has establecido las coordenadas con la Wand!"
+invalid_id: "Introduce un valor numérico!"
+
+# Remove Heads Command
+id_not_exists: "No hay ninguna posición guardada con esa ID."
+coord_removed: "Has eliminado posición con id %id% del sistema."
+
+# Remove Player Data Heads Command
+player_not_exists: "Este jugador no existe. ¿Es correcto el nombre?"
+data_removed: "Los datos del jugador %player% se han eliminado del sistema."
+
+# Help Command
 help_message:
   - "&c/heads wand &8: &fObtener la varita de configuración."
   - "&c/heads add <id> &8: &fAñade una nueva cabeza."
@@ -38,3 +73,26 @@ help_message:
   - "&c/heads list &8: &fMuestra todas las cabezas y su ubicación."
   - "&c/heads help &8: &fMuestra los comandos disponibles."
   - "&c/heads removeData &9<player> &8: &fElimina los datos del jugador."
+
+cmd_usage: "Uso correcto: %cmd%"
+
+# List Heads Command
+list_gui:
+  title: "Head Locations"
+  item_name: "&aID %id%"
+  first_page_material: "PAPER"
+  last_page_material: "PAPER"
+  next_page_material: "FEATHER"
+  previous_page_material: "FEATHER"
+  first_page_name: "FIRST PAGE"
+  last_page_name: "LAST PAGE"
+  next_page_name: "NEXT PAGE"
+  previous_page_name: "PREVIOUS PAGE"
+  item_lore:
+    - "&eLocation: &6%X%x %Y%y %Z%z"
+    - ""
+    - "&eClick here to teleport!"
+
+teleport_head: "Has sido teletransportado hasta la ubicación."
+no_heads_list: "No hay todavía ninguna posición establecida para las cabezas."
+list_heads: "Mostrando menú con todas las posiciones..."

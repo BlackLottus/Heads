@@ -2,6 +2,7 @@ package me.black_lottus.heads.file;
 
 import me.black_lottus.heads.Heads;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ public class Files {
     private final java.io.File file;
     private final boolean comments;
 
-    public static final String COMMAND_PREFIX = ChatColor.BLUE + ChatColor.BOLD.toString() + "Heads " + ChatColor.GRAY + ">> ";
+    public static final String COMMAND_PREFIX = ChatColor.BLUE + ChatColor.BOLD.toString() + "Heads " + ChatColor.WHITE + ">> ";
 
     public Files(Heads m, String s, boolean defaults, boolean comments) {
         this.comments = comments;
@@ -137,11 +138,17 @@ public class Files {
         return this.config;
     }
 
-    public String get(String s) {
+    public String getWithoutPrefix(String s) {
         if (config.getString(s) == null) {
             return "";
         }
         return Objects.requireNonNull(this.config.getString(s)).replaceAll("<l>", "¡").replaceAll("&", "§").replaceAll("-,-", "ñ");
+    }
+    public String get(String s) {
+        if (config.getString(s) == null) {
+            return "";
+        }
+        return (COMMAND_PREFIX + this.config.getString(s)).replaceAll("<l>", "¡").replaceAll("&", "§").replaceAll("-,-", "ñ");
     }
 
     public String get(Player p, String s) {
@@ -158,6 +165,10 @@ public class Files {
         set(s, def);
         save();
         return def;
+    }
+
+    public Material getMaterial(String s){
+        return Material.valueOf(Objects.requireNonNull(this.config.getString(s)));
     }
 
     public int getInt(String s) {

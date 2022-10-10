@@ -6,10 +6,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 public class Permissions {
     private static final FileConfiguration config = Heads.getInstance().getConfig();
 
-    public static String USE_PERM;
+    public static String ADMIN_PERM, COLLECT_PERM;
 
     /** Get permissions from Config.yml **/
     public static void initialize(){
-        USE_PERM = config.getString("permissions.use");
+        ADMIN_PERM = config.getString("permissions.admin");
+        COLLECT_PERM = config.getString("permissions.collect");
     }
 }

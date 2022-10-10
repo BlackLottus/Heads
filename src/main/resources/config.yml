@@ -32,15 +32,10 @@ mysql-database:
   username: Black
   password: black_lottus
 
-####################################################
-###                  CLAN BASICS                 ###
-####################################################
-clan:
-  max-characters: 12
-  min-characters: 4
 
 ####################################################
 ###                  PERMISSIONS                 ###
 ####################################################
 permissions:
-  use: "heads.use"
+  admin: "heads.admin"
+  collect: "heads.collect"

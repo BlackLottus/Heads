@@ -9,30 +9,32 @@ import org.bukkit.Location;
 
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class MysqLoader implements StorageManager {
 
     final static String LOCATIONS_DB = "CREATE TABLE IF NOT EXISTS "
-            + "Locations(id INTEGER PRIMARY KEY AUTO_INCREMENT, location VARCHAR(50) NOT NULL UNIQUE)";
+            + "Locations(id INTEGER PRIMARY KEY, location VARCHAR(50) NOT NULL UNIQUE)";
     final static String PLAYER_DB = "CREATE TABLE IF NOT EXISTS "
             + "Players(id INTEGER PRIMARY KEY AUTO_INCREMENT, uuid VARCHAR(50) NOT NULL UNIQUE, nickname VARCHAR(30) NOT NULL UNIQUE)";
     final static String HEADS_DB = "CREATE TABLE IF NOT EXISTS "
             + "Heads(id INTEGER PRIMARY KEY AUTO_INCREMENT, uuid VARCHAR(50), headID INTEGER)";
 
     final static String COUNT_HEADS = "SELECT COUNT(*) FROM Heads WHERE uuid=?";
+    final static String PLAYER_HEADS = "SELECT * FROM Heads h, Locations l WHERE h.uuid=? AND h.headID = l.id";
     final static String LIST_LOCATIONS = "SELECT * FROM Locations";
 
-    final static String INSERT_LOCATION = "INSERT IGNORE INTO Locations(location) " +
-            "VALUES (?);";
+    final static String INSERT_LOCATION = "INSERT IGNORE INTO Locations(id,location) " +
+            "VALUES (?,?);";
     final static String INSERT_PLAYER = "INSERT IGNORE INTO Players(uuid, nickname) " +
             "VALUES (?,?);";
     final static String INSERT_HEAD = "INSERT INTO Heads(uuid, headID) " +
             "VALUES (?,?);";
 
     final static String DELETE_LOCATION = "DELETE FROM Locations WHERE id = ?";
-    final static String DELETE_PLAYER = "DELETE FROM Players WHERE uuid = ?";
+    final static String DELETE_PLAYER = "DELETE FROM Players WHERE uuid= ?; DELETE FROM Heads WHERE uuid= ?";
     final static String DELETE_HEAD = "DELETE FROM Heads WHERE id = ? AND uuid = ?";
 
     private final HikariDataSource source;
@@ -107,7 +109,24 @@ public class MysqLoader implements StorageManager {
     }
 
     @Override
-    public Integer getHeads(UUID uuid) {
+    public ArrayList<Integer> getPlayerHeads(UUID uuid) {
+        ArrayList<Integer> heads = new ArrayList<>();
+
+        try (Connection connection = source.getConnection();
+             PreparedStatement pr = connection.prepareStatement(PLAYER_HEADS)){
+            pr.setString(1, uuid.toString());
+            ResultSet r = pr.executeQuery();
+            while (r.next()) {
+                heads.add(r.getInt("headID"));
+            }
+            r.close();
+        }
+        catch (Exception e) {e.printStackTrace();}
+        return heads;
+    }
+
+    @Override
+    public Integer getTotalHeads(UUID uuid) {
         int heads = 0;
         try (Connection connection = source.getConnection();
              PreparedStatement pr = connection.prepareStatement(COUNT_HEADS)){
@@ -121,10 +140,11 @@ public class MysqLoader implements StorageManager {
     }
 
     @Override
-    public void addLocation(Location loc) {
+    public void addLocation(Integer id, Location loc) {
         try (Connection connection = source.getConnection();
              PreparedStatement pr = connection.prepareStatement(INSERT_LOCATION)){
-            pr.setString(1, stringFromLocation(loc));
+            pr.setInt(1, id);
+            pr.setString(2, stringFromLocation(loc));
             pr.execute();
         }
         catch (Exception e) {e.printStackTrace();}
@@ -169,6 +189,7 @@ public class MysqLoader implements StorageManager {
         try (Connection connection = source.getConnection();
              PreparedStatement pr = connection.prepareStatement(DELETE_PLAYER)){
             pr.setString(1, uuid.toString());
+            pr.setString(2, uuid.toString());
             pr.execute();
         }
         catch (Exception e) {e.printStackTrace();}

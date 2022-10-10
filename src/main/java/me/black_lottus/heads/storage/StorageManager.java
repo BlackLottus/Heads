@@ -3,6 +3,7 @@ package me.black_lottus.heads.storage;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -10,9 +11,11 @@ public interface StorageManager {
 
     HashMap<Location, Integer> listLocations();
 
-    Integer getHeads(UUID uuid);
+    ArrayList<Integer> getPlayerHeads(UUID uuid);
 
-    void addLocation(Location loc);
+    Integer getTotalHeads(UUID uuid);
+
+    void addLocation(Integer id, Location loc);
 
     void addHead(UUID uuid, Integer id);
 
