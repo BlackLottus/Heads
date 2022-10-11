@@ -1,6 +1,7 @@
 package me.black_lottus.heads.storage.file;
 
 import me.black_lottus.heads.Heads;
+import me.black_lottus.heads.data.Data;
 import me.black_lottus.heads.file.Files;
 import me.black_lottus.heads.storage.StorageManager;
 import org.bukkit.Bukkit;
@@ -75,24 +76,27 @@ public class FileLoader implements StorageManager {
 
     @Override
     public void removeHead(Integer id, UUID uuid) {
-        String s;
-        if(fileConfig.getConfig().isSet("players."+ uuid.toString())){
-            s = fileConfig.getConfig().getString("players."+ uuid.toString());
-            String[] str = s.split(":");
-            String newVar = "";
+        if(fileConfig.getConfig().isSet("players."+ uuid)){
+            String[] str = fileConfig.getConfig().getString("players."+ uuid).split(":");
+            String newStr = "";
             int count = 1;
-            for(String key : str){
-                if(Integer.parseInt(key) != id){
-                    Bukkit.broadcastMessage(key);
-                    if(str.length == count) {
-                        newVar = newVar + key;
+            int splitSize = str.length;
+            for(String s : str){
+                try {
+                    if(Integer.parseInt(s) != id){
+                        if(splitSize == count) newStr = newStr + Integer.parseInt(s);
+                        else newStr = newStr +  Integer.parseInt(s) + ":";
+                        count++;
                     }else {
-                        newVar = newVar + key + ":";
+                        if(splitSize == count){
+                            if(str.length == 1) newStr = null;
+                            else newStr = newStr.substring(0, newStr.length()-1);
+                        }
+                        splitSize--;
                     }
-                }
-                count++;
+                    fileConfig.set("players."+uuid, newStr);
+                } catch (NumberFormatException ignored) { }
             }
-            fileConfig.set("players."+ uuid, newVar);
             fileConfig.save();
         }
     }
@@ -106,6 +110,28 @@ public class FileLoader implements StorageManager {
     @Override
     public void removeLocation(Integer id) {
         fileConfig.set("locations."+id, null);
+        for(String path : fileConfig.getConfig().getConfigurationSection("players").getKeys(true)){
+            String[] split = fileConfig.getWithoutPrefix("players."+path).split(":");
+            int count = 1;
+            int splitSize = split.length;
+            String newStr = "";
+            for(String s : split){
+                try {
+                    if(Integer.parseInt(s) != id){
+                        if(splitSize == count) newStr = newStr + Integer.parseInt(s);
+                        else newStr = newStr +  Integer.parseInt(s) + ":";
+                        count++;
+                    }else {
+                        if(splitSize == count){
+                            if(split.length == 1) newStr = null;
+                            else newStr = newStr.substring(0, newStr.length()-1);
+                        }
+                        splitSize--;
+                    }
+                    fileConfig.set("players."+path, newStr);
+                } catch (NumberFormatException ignored) { }
+            }
+        }
         fileConfig.save();
     }
 

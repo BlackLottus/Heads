@@ -15,11 +15,6 @@
 ==================
 - Animaciones de las cabezas
 - Sonidos, Titles, Efectos.
-- Filter Material --> Que no sea solo cabezas.
-
-- Comando o algo para ver las cabezas que tienes en total recogidas.
-
-- Si se elimina una cabeza del sistema. Hacer que si un jugador la tenía recogida, se le elimine.
 
 =================
    WORKING ON
@@ -30,4 +25,13 @@
 =================
      ERRORES
 =================
-- Error en FileStorage (Eliminar una head a un jugador)
+
+=================
+ COSAS AGREGADAS
+=================
+- PlaceHolders
+- Comandos y Estructura
+- File Storage y Estructura
+- MySQL Storage y Estructura
+- Eventos para recoger las cabezas.
+- Inventario OP en List heads.

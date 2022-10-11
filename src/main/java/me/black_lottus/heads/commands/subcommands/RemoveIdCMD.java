@@ -7,9 +7,10 @@ import me.black_lottus.heads.data.Permissions;
 import me.black_lottus.heads.file.Files;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public class RemoveCMD extends CommandInterface {
+public class RemoveIdCMD extends CommandInterface {
 
     private final Heads plugin = Heads.getInstance();
     private final Files lang = plugin.getLang();
@@ -23,20 +24,16 @@ public class RemoveCMD extends CommandInterface {
                 player.sendMessage(lang.get("id_not_exists"));
                 return;
             }
-            plugin.storage.removeLocation(id); // Remove from Database storage!
-            for(Location loc : Data.getLocations().keySet()){
-                if(Data.getLocations().get(loc) == id) {
-                    Data.getLocations().remove(loc); // Remove from Memory!
-                    player.sendMessage(lang.get("coord_removed").replace("%id%",""+id));
-                    // Re calc all players online heads!
-                    if(!Bukkit.getOnlinePlayers().isEmpty()){
-                        for(Player online : Bukkit.getOnlinePlayers()){
-                            Data.recalcTotalHeads(online.getUniqueId());
-                        }
-                    }
-                    return;
-                }
+            String playerTarget = args[2];
+            OfflinePlayer playerOffline = Bukkit.getOfflinePlayer(playerTarget);
+            if(!playerOffline.hasPlayedBefore()){
+                player.sendMessage(lang.get("player_not_exists"));
+                return;
             }
+            plugin.storage.removeHead(id, playerOffline.getUniqueId()); // Remove from Database storage!
+            Data.recalcTotalHeads(playerOffline.getUniqueId());
+            player.sendMessage(lang.get("id_player_removed").replace("%id%",""+id).replace("%player%",playerOffline.getName()));
+
         } catch (NumberFormatException e) {
             player.sendMessage(lang.get("invalid_id"));
         }
@@ -44,11 +41,11 @@ public class RemoveCMD extends CommandInterface {
 
     @Override
     public String name() {
-        return plugin.cmdManager.remove;
+        return plugin.cmdManager.removeId;
     }
 
     @Override
-    public String usage() { return "/heads remove <id>"; }
+    public String usage() { return "/heads removeId <id> <player>"; }
 
     @Override
     public String[] aliases() { return new String[0]; }
@@ -57,5 +54,5 @@ public class RemoveCMD extends CommandInterface {
     public String permission() { return Permissions.ADMIN_PERM; }
 
     @Override
-    public Integer[] length() { return new Integer[]{2}; }
+    public Integer[] length() { return new Integer[]{3}; }
 }

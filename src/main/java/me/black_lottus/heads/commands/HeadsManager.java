@@ -23,7 +23,7 @@ public class HeadsManager implements CommandExecutor {
 
     //Sub Commands
     public String heads = "heads";
-    public String wand = "wand", add = "add", remove = "remove", removeData = "removeData", list = "list", help = "help";
+    public String wand = "wand", add = "add", remove = "remove", removeId = "removeId", removeData = "removeData", list = "list", help = "help";
 
     public void setup() {
         Objects.requireNonNull(plugin.getCommand(heads)).setExecutor(this);
@@ -31,6 +31,7 @@ public class HeadsManager implements CommandExecutor {
         this.commands.add(new WandCMD());
         this.commands.add(new AddCMD());
         this.commands.add(new RemoveCMD());
+        this.commands.add(new RemoveIdCMD());
         this.commands.add(new RemoveDataCMD());
         this.commands.add(new ListCMD());
         this.commands.add(new HelpCMD());

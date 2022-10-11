@@ -33,9 +33,9 @@ public class MysqLoader implements StorageManager {
     final static String INSERT_HEAD = "INSERT INTO Heads(uuid, headID) " +
             "VALUES (?,?);";
 
-    final static String DELETE_LOCATION = "DELETE FROM Locations WHERE id = ?";
+    final static String DELETE_LOCATION = "DELETE FROM Locations WHERE id = ?; DELETE FROM Heads WHERE headID = ?";
     final static String DELETE_PLAYER = "DELETE FROM Players WHERE uuid= ?; DELETE FROM Heads WHERE uuid= ?";
-    final static String DELETE_HEAD = "DELETE FROM Heads WHERE id = ? AND uuid = ?";
+    final static String DELETE_HEAD = "DELETE FROM Heads WHERE headID = ? AND uuid = ?";
 
     private final HikariDataSource source;
 
@@ -200,6 +200,7 @@ public class MysqLoader implements StorageManager {
         try (Connection connection = source.getConnection();
              PreparedStatement pr = connection.prepareStatement(DELETE_LOCATION)){
             pr.setInt(1, id);
+            pr.setInt(2, id);
             pr.execute();
         }
         catch (Exception e) {e.printStackTrace();}

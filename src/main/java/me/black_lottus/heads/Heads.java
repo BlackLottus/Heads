@@ -7,7 +7,9 @@ import me.black_lottus.heads.file.Files;
 import me.black_lottus.heads.listener.PlayerListener;
 import me.black_lottus.heads.storage.StorageLoader;
 import me.black_lottus.heads.storage.StorageManager;
+import me.black_lottus.heads.utils.PlaceHolder;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Heads extends JavaPlugin {
@@ -28,12 +30,30 @@ public final class Heads extends JavaPlugin {
 
         Permissions.initialize();
         Data.initialize();
+        new PlaceHolder().register();
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), instance);
 
         cmdManager = new HeadsManager();
         cmdManager.setup();
 
+        onReload();
+    }
+
+    public void onDisable(){
+        if(!Bukkit.getOnlinePlayers().isEmpty()){
+            for(Player player : Bukkit.getOnlinePlayers()){
+                Data.removeTotalHeads(player.getUniqueId());
+            }
+        }
+    }
+
+    private void onReload(){
+        if(!Bukkit.getOnlinePlayers().isEmpty()){
+            for(Player player : Bukkit.getOnlinePlayers()){
+                Data.addTotalHeads(player.getUniqueId());
+            }
+        }
     }
 
     public static Heads getInstance() {

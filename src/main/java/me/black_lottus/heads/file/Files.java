@@ -200,7 +200,7 @@ public class Files {
     public List<String> getList(String s) {
         List<String> now = new ArrayList<>();
         for (String st : this.config.getStringList(s)) {
-            now.add(st.replaceAll("&", "§"));
+            now.add(st.replaceAll("%version%",Heads.getInstance().getDescription().getVersion()).replaceAll("&", "§"));
         }
         return now;
     }

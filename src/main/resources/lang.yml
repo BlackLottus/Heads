@@ -61,18 +61,30 @@ invalid_id: "Introduce un valor numérico!"
 id_not_exists: "No hay ninguna posición guardada con esa ID."
 coord_removed: "Has eliminado posición con id %id% del sistema."
 
+# Remove Id Player Command
+id_player_removed: "Se ha eliminado la id %id% del jugador %player% del sistema."
+
 # Remove Player Data Heads Command
 player_not_exists: "Este jugador no existe. ¿Es correcto el nombre?"
 data_removed: "Los datos del jugador %player% se han eliminado del sistema."
 
 # Help Command
 help_message:
-  - "&c/heads wand &8: &fObtener la varita de configuración."
-  - "&c/heads add <id> &8: &fAñade una nueva cabeza."
-  - "&c/heads remove <id> &8: &fElimina la cabeza seleccionada."
-  - "&c/heads list &8: &fMuestra todas las cabezas y su ubicación."
-  - "&c/heads help &8: &fMuestra los comandos disponibles."
-  - "&c/heads removeData &9<player> &8: &fElimina los datos del jugador."
+  - ""
+  - "&7Plugin: Heads"
+  - "&7Creator: Black_Lottus"
+  - "&7Version: %version%"
+  - ""
+  - "&f&lComandos disponibles:"
+  - ""
+  - "&f - &b/heads wand &8: &fObtener la varita de configuración."
+  - "&f - &b/heads add &e<id> &8: &fAñade una nueva cabeza."
+  - "&f - &b/heads remove  &e<id> &8: &fElimina la cabeza seleccionada."
+  - "&f - &b/heads list &8: &fMuestra todas las cabezas y su ubicación."
+  - "&f - &b/heads help &8: &fMuestra los comandos disponibles."
+  - "&f - &b/heads removeData &e<player> &8: &fEliminar datos del jugador."
+  - "&f - &b/heads removeId &e<id> <player> &8: &fElimina la cabeza especificada al jugador."
+  - ""
 
 cmd_usage: "Uso correcto: %cmd%"
 

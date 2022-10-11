@@ -32,7 +32,7 @@ public class PlayerListener implements Listener {
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
 
-        if(e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if(e.getAction() == Action.LEFT_CLICK_BLOCK) {
             if(p.hasPermission(Permissions.COLLECT_PERM)){
                 if(Data.getLocations().containsKey(e.getClickedBlock().getLocation())){
                     int id = Data.getLocations().get(e.getClickedBlock().getLocation());
@@ -41,6 +41,7 @@ public class PlayerListener implements Listener {
                         plugin.storage.addPlayer(p.getUniqueId(),p.getName());
                         plugin.storage.addHead(p.getUniqueId(), id);
                         p.sendMessage(lang.get("collect_head"));
+                        Data.recalcTotalHeads(p.getUniqueId()); // Add to memory total heads!
                     }else{
                         p.sendMessage(lang.get("already_collected"));
                     }
@@ -71,12 +72,12 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
-
+        Data.addTotalHeads(e.getPlayer().getUniqueId());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
-
+        Data.removeTotalHeads(e.getPlayer().getUniqueId());
     }
 
 }

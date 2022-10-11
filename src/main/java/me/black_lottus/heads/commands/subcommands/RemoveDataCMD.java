@@ -24,6 +24,7 @@ public class RemoveDataCMD extends CommandInterface {
             return;
         }
         plugin.storage.removePlayer(playerOffline.getUniqueId());
+        Data.recalcTotalHeads(playerOffline.getUniqueId());
         player.sendMessage(lang.get("data_removed").replace("%player%",playerOffline.getName()));
     }
 
