@@ -6,6 +6,7 @@ import me.black_lottus.luckyheads.data.Data;
 import me.black_lottus.luckyheads.data.Permissions;
 import me.black_lottus.luckyheads.file.Files;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -34,7 +35,12 @@ public class RemoveCMD extends CommandInterface {
             for(Location loc : Data.getLocations().keySet()){
                 if(Data.getLocations().get(loc) == id) {
                     Data.getLocations().remove(loc); // Remove from Memory!
-                    player.sendMessage(lang.get("coord_removed").replace("%id%",""+id));
+                    // Messages to complete REMOVE Head!
+                    if(plugin.getConfig().getBoolean("broadcasts.remove-head.enable")){ // Check if broadcast is enabled!
+                        Bukkit.getOnlinePlayers().stream().toList().forEach(p -> p.sendMessage(lang.getWithoutPrefix("prefix") +
+                                plugin.getConfig().getString("broadcasts.remove-head.message").replace("&", "§")
+                                        .replace("%id%",""+id)));
+                    }else player.sendMessage(lang.get("coord_removed").replace("%id%",""+id));
                     // Re calc all players online heads!
                     if(!Bukkit.getOnlinePlayers().isEmpty()){
                         for(Player online : Bukkit.getOnlinePlayers()){ // Due to we remove a head location, we need to re calc players!

@@ -3,8 +3,12 @@ package me.black_lottus.luckyheads.commands.subcommands;
 import me.black_lottus.luckyheads.LuckyHeads;
 import me.black_lottus.luckyheads.commands.CommandInterface;
 import me.black_lottus.luckyheads.data.Data;
+import me.black_lottus.luckyheads.data.Methods;
 import me.black_lottus.luckyheads.data.Permissions;
 import me.black_lottus.luckyheads.file.Files;
+import me.black_lottus.luckyheads.utils.Title;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class AddCMD extends CommandInterface {
@@ -38,8 +42,16 @@ public class AddCMD extends CommandInterface {
                 Data.getLocations().put(Data.getWandPos().get(player.getUniqueId()), id); // Add location head to the Memory!
                 Data.getWandPos().remove(player.getUniqueId()); // Remove location from the HashMap wandPos! -->> Is already saved --> i don't need!
 
+                Methods.sendTitle("titles.add-head.enable",player, // Send Title if is Enabled in Config.
+                        ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("titles.add-head.title")),
+                        ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("titles.add-head.subtitle")));
+
                 // Messages to complete ADD Head!
-                player.sendMessage(lang.get("coord_added"));
+                if(plugin.getConfig().getBoolean("broadcasts.add-head.enable")){ // Check if broadcast is enabled!
+                    Bukkit.getOnlinePlayers().stream().toList().forEach(p -> p.sendMessage(lang.getWithoutPrefix("prefix") +
+                            plugin.getConfig().getString("broadcasts.add-head.message").replace("&", "§")
+                                    .replace("%id%",""+id)));
+                }else player.sendMessage(lang.get("coord_added"));
             }else player.sendMessage(lang.get("not_coord_set")); // Need to establish coords with Wand!
         } catch (NumberFormatException e) {
             player.sendMessage(lang.get("invalid_id"));

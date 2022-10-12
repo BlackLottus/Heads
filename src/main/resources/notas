@@ -12,8 +12,7 @@
 ==================
  COSAS QUE FALTAN
 ==================
-- Sonidos, Titles, Efectos.
-- Mensajes globales para anunciar que has encontrado una lucky head...
+
 =================
    WORKING ON
 =================
@@ -31,6 +30,8 @@
 - Comandos y Estructura
 - File Storage y Estructura
 - MySQL Storage y Estructura
+- Sonidos, Titles, Efectos.
+- Mensajes globales para anunciar que has encontrado una lucky head...
 - Eventos para recoger las cabezas.
 - Inventario OP en List heads.
 - Particles para cuando te falta por recoger.
