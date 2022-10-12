@@ -1,10 +1,11 @@
-name: Heads
+name: LuckyHeads
 version: '${project.version}'
-main: me.black_lottus.heads.Heads
+main: me.black_lottus.luckyheads.LuckyHeads
 authors: [ Black_Lottus ]
 description: Plugin to find heads and save data!
 commands:
-  heads:
+  luckyheads:
     usage: /<command>
     description: Run heads commands
+    aliases: [lh, luckyheads]
 

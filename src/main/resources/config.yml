@@ -23,7 +23,7 @@ version: 1.5.1 ALPHA
 ####################################################
 #Available storages: mysql, file
 #Defaults always get the file storage!
-storage-mode: mysql
+storage-mode: file
 
 mysql-database:
   host: 127.0.0.1
@@ -32,10 +32,9 @@ mysql-database:
   username: Black
   password: black_lottus
 
-
 ####################################################
 ###                  PERMISSIONS                 ###
 ####################################################
 permissions:
-  admin: "heads.admin"
-  collect: "heads.collect"
+  admin: "luckyheads.admin"
+  collect: "luckyheads.collect"

@@ -20,7 +20,7 @@ mysql_error: "&cA error have been occurred when we try to load mysql database!"
 ##################################################################
 ##                            PREFIX                            ##
 ##################################################################
-prefix: "&9&lHeads &f>> "
+prefix: "&b&lLuckyHeads &f>> "
 
 ##################################################################
 ##                       GENERAL MESSAGES                       ##
@@ -36,19 +36,20 @@ already_collected: "Ya has encontrado esta cabeza anteriormente."
 # Wand Command
 wand:
   material: 'STICK'
-  name: "&a&lHeads WAND"
+  name: "&a&lLuckyHeads WAND"
   lore:
     - "&8Wand usage"
     - ""
     - "&fUtiliza el &aBotón Derecho &fpara"
     - "&festablecer una nueva posición"
-    - "&fy luego utiliza &b/heads add <id>"
+    - "&fy luego utiliza &b/luckyheads add <id>"
     - "&fpara guardarla."
 
 already_have_wand: "Ya tienes una Wand en el inventario."
 get_wand: "Has obtenido la varita de configuración."
 cant_use_wand: "No puedes utilizar este item. Lo vamos a eliminar!"
 block_selected: "Seleccionado el Bloque: %X%x %Y%y %Z%z"
+already_block_selected: "Ya tienes seleccionada esta coordenada."
 
 # Add Heads Command
 id_already_exists: "Esta ID ya existe. Utiliza otra."
@@ -71,19 +72,19 @@ data_removed: "Los datos del jugador %player% se han eliminado del sistema."
 # Help Command
 help_message:
   - ""
-  - "&7Plugin: Heads"
+  - "&7Plugin: LuckyHeads"
   - "&7Creator: Black_Lottus"
   - "&7Version: %version%"
   - ""
   - "&f&lComandos disponibles:"
   - ""
-  - "&f - &b/heads wand &8: &fObtener la varita de configuración."
-  - "&f - &b/heads add &e<id> &8: &fAñade una nueva cabeza."
-  - "&f - &b/heads remove  &e<id> &8: &fElimina la cabeza seleccionada."
-  - "&f - &b/heads list &8: &fMuestra todas las cabezas y su ubicación."
-  - "&f - &b/heads help &8: &fMuestra los comandos disponibles."
-  - "&f - &b/heads removeData &e<player> &8: &fEliminar datos del jugador."
-  - "&f - &b/heads removeId &e<id> <player> &8: &fElimina la cabeza especificada al jugador."
+  - "&f - &b/luckyheads wand &8: &fObtener la varita de configuración."
+  - "&f - &b/luckyheads add &e<id> &8: &fAñade una nueva cabeza."
+  - "&f - &b/luckyheads remove  &e<id> &8: &fElimina la cabeza seleccionada."
+  - "&f - &b/luckyheads list &8: &fMuestra todas las cabezas y su ubicación."
+  - "&f - &b/luckyheads help &8: &fMuestra los comandos disponibles."
+  - "&f - &b/luckyheads removeData &e<player> &8: &fEliminar datos del jugador."
+  - "&f - &b/luckyheads removeId &e<id> <player> &8: &fElimina la cabeza especificada al jugador."
   - ""
 
 cmd_usage: "Uso correcto: %cmd%"
