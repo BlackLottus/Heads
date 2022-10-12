@@ -9,22 +9,24 @@
     |        |            |                  |   |        |                     |   |    Konkuo    |      1        |
     |----------------------------------------|   |------------------------------|   |------------------------------|
 
-
 ==================
  COSAS QUE FALTAN
 ==================
-- Animaciones de las cabezas
 - Sonidos, Titles, Efectos.
-
+- Mensajes globales para anunciar que has encontrado una lucky head...
+- Cambiar el nombre a Lucky Heads!
+- Añadir los comentarios a cada línea de código.
 =================
    WORKING ON
 =================
-
+- Animaciones de las cabezas tiene 2 partes.
+  - La animación de cuando recoges la cabeza
 
 
 =================
      ERRORES
 =================
+
 
 =================
  COSAS AGREGADAS
@@ -35,3 +37,6 @@
 - MySQL Storage y Estructura
 - Eventos para recoger las cabezas.
 - Inventario OP en List heads.
+- Particles para cuando te falta por recoger.
+- La animación de cuando está en el suelo y que indica que no la tienes recogida.
+- Animaciones de las cabezas al recoger.

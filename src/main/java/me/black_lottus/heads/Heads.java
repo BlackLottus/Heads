@@ -7,6 +7,7 @@ import me.black_lottus.heads.file.Files;
 import me.black_lottus.heads.listener.PlayerListener;
 import me.black_lottus.heads.storage.StorageLoader;
 import me.black_lottus.heads.storage.StorageManager;
+import me.black_lottus.heads.utils.Effects;
 import me.black_lottus.heads.utils.PlaceHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -38,6 +39,7 @@ public final class Heads extends JavaPlugin {
         cmdManager.setup();
 
         onReload();
+        Effects.runEffects();
     }
 
     public void onDisable(){

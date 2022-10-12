@@ -2,10 +2,9 @@ package me.black_lottus.heads.listener;
 
 import me.black_lottus.heads.Heads;
 import me.black_lottus.heads.data.Data;
+import me.black_lottus.heads.data.Methods;
 import me.black_lottus.heads.data.Permissions;
 import me.black_lottus.heads.file.Files;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -18,7 +17,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PlayerListener implements Listener {
 
@@ -32,6 +30,7 @@ public class PlayerListener implements Listener {
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
 
+
         if(e.getAction() == Action.LEFT_CLICK_BLOCK) {
             if(p.hasPermission(Permissions.COLLECT_PERM)){
                 if(Data.getLocations().containsKey(e.getClickedBlock().getLocation())){
@@ -42,6 +41,7 @@ public class PlayerListener implements Listener {
                         plugin.storage.addHead(p.getUniqueId(), id);
                         p.sendMessage(lang.get("collect_head"));
                         Data.recalcTotalHeads(p.getUniqueId()); // Add to memory total heads!
+                        Methods.sendClaimSound(p, e.getClickedBlock().getLocation());
                     }else{
                         p.sendMessage(lang.get("already_collected"));
                     }

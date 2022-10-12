@@ -33,10 +33,12 @@ public class Inventories {
             // Add an element to the group
             // Elements are in the order they got added to the group and don't need to have the same type.
             //group.addElement((new StaticGuiElement('e', new ItemStack(Material.CHEST), Data.clans.get(text).getClanName())));
+            String id = Data.getLocations().get(loc).toString();
             group.addElement(new StaticGuiElement('e',
-                    Items.itemStack(Material.SKULL_ITEM, lang.getWithoutPrefix("list_gui.item_name").replace("%id%", Data.getLocations().get(loc)+""), lore(loc)), 1, // Display a number as the item count
+                    Items.itemStack(Material.SKULL_ITEM, lang.getWithoutPrefix("list_gui.item_name").replace("%id%", id), lore(loc)), 1, // Display a number as the item count
                     click -> {
-                        player.teleport(loc.add(0.5,0,0.5));
+                        Location newLoc = new Location(loc.getWorld(), loc.getBlockX()+0.5,loc.getBlockY(),loc.getBlockZ()+0.5);
+                        player.teleport(newLoc);
                         player.sendMessage(lang.get("teleport_head"));
                         gui.close();
                         return true; // returning true will cancel the click event and stop taking the item

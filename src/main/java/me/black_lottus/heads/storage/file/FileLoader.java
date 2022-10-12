@@ -48,8 +48,10 @@ public class FileLoader implements StorageManager {
     @Override
     public Integer getTotalHeads(UUID uuid) {
         int heads = 0;
-        String[] a = fileConfig.getConfig().getString("players."+ uuid).split(":");
-        heads = a.length;
+        if(fileConfig.getConfig().isSet("players."+uuid)){
+            String[] a = fileConfig.getConfig().getString("players."+ uuid).split(":");
+            heads = a.length;
+        }
         return heads;
     }
 
