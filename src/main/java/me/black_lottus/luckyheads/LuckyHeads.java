@@ -10,11 +10,8 @@ import me.black_lottus.luckyheads.storage.StorageManager;
 import me.black_lottus.luckyheads.utils.Effects;
 import me.black_lottus.luckyheads.utils.PlaceHolder;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Arrays;
 
 public final class LuckyHeads extends JavaPlugin {
 
@@ -22,7 +19,6 @@ public final class LuckyHeads extends JavaPlugin {
     private Files lang;
     public StorageManager storage;
     public CommandManager cmdManager;
-    public static boolean isNewVersion;
 
     public void onEnable() {
         setInstance(this);
@@ -36,7 +32,6 @@ public final class LuckyHeads extends JavaPlugin {
         Permissions.initialize();
         Data.initialize();
         new PlaceHolder().register();
-        isNewVersion = Arrays.stream(Material.values()).map(Material::name).toList().contains("PLAYER_HEAD");
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), instance);
 

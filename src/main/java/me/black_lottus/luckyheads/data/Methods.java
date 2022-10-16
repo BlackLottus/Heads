@@ -3,7 +3,6 @@ package me.black_lottus.luckyheads.data;
 import me.black_lottus.luckyheads.LuckyHeads;
 import me.black_lottus.luckyheads.utils.Effects;
 import me.black_lottus.luckyheads.utils.Sounds;
-import me.black_lottus.luckyheads.utils.Title;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -41,18 +40,5 @@ public class Methods {
                 i--;
             }
         }.runTaskTimerAsynchronously(LuckyHeads.getInstance(), 0L, 2L);
-    }
-
-    //TODO...........................................
-    // *********************************************/
-    //               Send Title Method            */
-    // *******************************************/
-    // This method display a title in the current location to the current player!
-
-    public static void sendTitle(String path, Player p, String title, String subtitle){
-        if(LuckyHeads.getInstance().getConfig().getBoolean(path)){
-            if(LuckyHeads.isNewVersion) p.sendTitle(title.replace("&","§"),subtitle.replace("&","§"));
-            else new Title(title.replace("&","§"), subtitle.replace("&","§")).send(p);
-        }
     }
 }

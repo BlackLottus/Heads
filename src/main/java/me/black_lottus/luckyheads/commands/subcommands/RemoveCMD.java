@@ -6,6 +6,7 @@ import me.black_lottus.luckyheads.data.Data;
 import me.black_lottus.luckyheads.data.Permissions;
 import me.black_lottus.luckyheads.file.Files;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

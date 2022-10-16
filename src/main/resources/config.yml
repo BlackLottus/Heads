@@ -62,6 +62,31 @@ broadcasts:
 
 
 ####################################################
+###                GENERAL OPTIONS               ###
+####################################################
+titles:
+  collect-head:
+    enable: true
+    title: "&4&l• &f&lLucky&4&lHeads &f&l•"
+    subtitle: "&AEnhorabuena! &fHas encontrado una cabeza de la suerte."
+  add-head:
+    enable: true
+    title: "&4&l• &f&lLucky&4&lHeads &f&l•"
+    subtitle: "&fHas agregado al sistema una nueva cabeza."
+
+broadcasts:
+  collect-head:
+    enable: true
+    message: "&a%player% &fha encontrado la &bLuckyHead &fnum&e %id%"
+  remove-head:
+    enable: true
+    message: "&fSe ha eliminado a todos los usuarios la cabeza con id &a%id%"
+  add-head:
+    enable: true
+    message: "&fSe ha agregado una nueva cabeza con id &a%id%&f. ¿Qué esperas para buscarla?"
+
+
+####################################################
 ###                  PERMISSIONS                 ###
 ####################################################
 permissions:
