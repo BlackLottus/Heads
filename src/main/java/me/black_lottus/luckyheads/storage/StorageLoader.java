@@ -32,7 +32,9 @@ public class StorageLoader {
                     loaderName = "mysql";
                     Bukkit.getConsoleSender().sendMessage(lang.get("selected_storage").replace("%mode%",loaderName));
                     return;
-                }catch (Exception e){ Bukkit.getConsoleSender().sendMessage(lang.get("mysql_error")); }
+                }catch (Exception e){
+                    Bukkit.getConsoleSender().sendMessage(lang.get("mysql_error"));
+                }
             }
         }else Bukkit.getConsoleSender().sendMessage(lang.get("none_storage"));
 

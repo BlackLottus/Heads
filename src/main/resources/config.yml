@@ -17,44 +17,48 @@
 #Don't edit this if you don't know what are you doing!
 version: 1.5.1 ALPHA
 
-
 ####################################################
 ###               STORAGE SETTINGS               ###
 ####################################################
 #Available storages: mysql, file
 #Defaults always get the file storage!
-storage-mode: file
+storage-mode: mysql
 
 mysql-database:
-  host: 127.0.0.1
+  host: '127.0.0.1'
   port: 3306
-  database: staff
-  username: Black
-  password: black_lottus
+  database: 'luckyheads'
+  username: 'admin'
+  password: 'password'
 
 ####################################################
 ###                GENERAL OPTIONS               ###
 ####################################################
+# Material of items displayed and listed in the command list!
+material-list-items: 'CHEST'
+
+# Do you want Titles? Why not?
 titles:
   collect-head:
     enable: true
     title: "&4&l• &f&lLucky&4&lHeads &f&l•"
-    subtitle: "&AEnhorabuena! &fHas encontrado una cabeza de la suerte."
+    subtitle: "&ACongratulations! &fYou found a Lucky Head."
   add-head:
     enable: true
     title: "&4&l• &f&lLucky&4&lHeads &f&l•"
-    subtitle: "&fHas agregado al sistema una nueva cabeza."
+    subtitle: "&fYou add a new Lucky Head to the system."
 
+# Broadcast actions?? Enable or Disable if you want!
 broadcasts:
   collect-head:
     enable: true
-    message: "&a%player% &fha encontrado la &bLuckyHead &fnum&e %id%"
+    message: "&a%player% &ffound a new &bLucky Head &fnum&e %id%"
   remove-head:
     enable: true
-    message: "&fSe ha eliminado a todos los usuarios la cabeza con id &a%id%"
+    message: "&fWe remove Lucky Head with id: &a%id% to all players!"
   add-head:
     enable: true
-    message: "&fSe ha agregado una nueva cabeza con id &a%id%&f. ¿Qué esperas para buscarla?"
+    message: "&fGuys! A new Lucky Head is placed on the server with id: &a%id%&f. What are you waiting for to pick it up?"
 
 
 ####################################################

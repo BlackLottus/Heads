@@ -44,7 +44,7 @@ public class Inventories {
             //group.addElement((new StaticGuiElement('e', new ItemStack(Material.CHEST), Data.clans.get(text).getClanName())));
             String id = Data.getLocations().get(loc).toString(); // Gets id from Locations HashMap.
             group.addElement(new StaticGuiElement('e',
-                    Items.itemStack(Material.SKULL_ITEM, lang.getWithoutPrefix("list_gui.item_name").replace("%id%", id), lore(loc)), 1, // Display a number as the item count
+                    Items.itemStack(Material.valueOf(plugin.getConfig().getString("material-list-items")), lang.getWithoutPrefix("list_gui.item_name").replace("%id%", id), lore(loc)), 1, // Display a number as the item count
                     click -> { // Create click event for cancel clicks and move items.
                         Location newLoc = new Location(loc.getWorld(), loc.getBlockX()+0.5,loc.getBlockY(),loc.getBlockZ()+0.5);
                         player.teleport(newLoc); // Teleports player to head location!

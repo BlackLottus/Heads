@@ -9,6 +9,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class RemoveDataCMD extends CommandInterface {
 
     private final LuckyHeads plugin = LuckyHeads.getInstance();
@@ -32,7 +34,7 @@ public class RemoveDataCMD extends CommandInterface {
         Data.recalcTotalHeads(playerOffline.getUniqueId()); // Re calc values from Memory!
 
         // Messages complete removeData!
-        player.sendMessage(lang.get("data_removed").replace("%player%",playerOffline.getName()));
+        player.sendMessage(lang.get("data_removed").replace("%player%", Objects.requireNonNull(playerOffline.getName())));
     }
 
     @Override

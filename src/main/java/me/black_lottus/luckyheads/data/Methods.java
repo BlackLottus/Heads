@@ -4,7 +4,6 @@ import me.black_lottus.luckyheads.LuckyHeads;
 import me.black_lottus.luckyheads.utils.Effects;
 import me.black_lottus.luckyheads.utils.Sounds;
 import me.black_lottus.luckyheads.utils.Title;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;

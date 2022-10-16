@@ -3,6 +3,7 @@ package me.black_lottus.luckyheads.storage.mysql;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import me.black_lottus.luckyheads.LuckyHeads;
+import me.black_lottus.luckyheads.file.Files;
 import me.black_lottus.luckyheads.storage.StorageManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -37,7 +38,9 @@ public class MysqLoader implements StorageManager {
     final static String DELETE_PLAYER = "DELETE FROM Players WHERE uuid= ?; DELETE FROM Heads WHERE uuid= ?";
     final static String DELETE_HEAD = "DELETE FROM Heads WHERE headID = ? AND uuid = ?";
 
-    private final HikariDataSource source;
+    private HikariDataSource source;
+    private final LuckyHeads plugin = LuckyHeads.getInstance();
+    private final Files lang = plugin.getLang();
 
     public MysqLoader(LuckyHeads plugin) {
         // Connect database
@@ -67,7 +70,6 @@ public class MysqLoader implements StorageManager {
         hikariConfig.addDataSourceProperty("maintainTimeStats", "false");
 
         source = new HikariDataSource(hikariConfig);
-
         createDB();
     }
 

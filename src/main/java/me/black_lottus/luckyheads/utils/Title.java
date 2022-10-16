@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Title {
     /* Title packet */
@@ -225,8 +226,9 @@ public class Title {
             try {
                 // Send timings first
                 Object handle = getHandle(player);
-                Object connection = getField(handle.getClass(),
-                        "playerConnection").get(handle);
+                assert handle != null;
+                Object connection = Objects.requireNonNull(getField(handle.getClass(),
+                        "playerConnection")).get(handle);
                 Object[] actions = packetActions.getEnumConstants();
                 Method sendPacket = getMethod(connection.getClass(),
                         "sendPacket");
@@ -237,12 +239,14 @@ public class Title {
                         stayTime * (ticks ? 1 : 20),
                         fadeOutTime * (ticks ? 1 : 20));
                 // Send if set
-                if (fadeInTime != -1 && fadeOutTime != -1 && stayTime != -1)
+                if (fadeInTime != -1 && fadeOutTime != -1 && stayTime != -1) {
+                    assert sendPacket != null;
                     sendPacket.invoke(connection, packet);
+                }
 
                 // Send title
-                Object serialized = getMethod(nmsChatSerializer, "a",
-                        String.class).invoke(
+                Object serialized = Objects.requireNonNull(getMethod(nmsChatSerializer, "a",
+                        String.class)).invoke(
                         null,
                         "{text:\""
                                 + ChatColor.translateAlternateColorCodes('&',
@@ -250,10 +254,11 @@ public class Title {
                                 + titleColor.name().toLowerCase() + "}");
                 packet = packetTitle.getConstructor(packetActions,
                         chatBaseComponent).newInstance(actions[0], serialized);
+                assert sendPacket != null;
                 sendPacket.invoke(connection, packet);
-                if (subtitle != "") {
+                if (!Objects.equals(subtitle, "")) {
                     // Send subtitle if present
-                    serialized = getMethod(nmsChatSerializer, "a", String.class)
+                    serialized = Objects.requireNonNull(getMethod(nmsChatSerializer, "a", String.class))
                             .invoke(null,
                                     "{text:\""
                                             + ChatColor

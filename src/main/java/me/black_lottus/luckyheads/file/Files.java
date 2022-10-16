@@ -1,14 +1,12 @@
 package me.black_lottus.luckyheads.file;
 
 import me.black_lottus.luckyheads.LuckyHeads;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.*;
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -146,7 +144,7 @@ public class Files {
         if (config.getString(s) == null) {
             return "";
         }
-        final String COMMAND_PREFIX = this.config.getString("prefix").replaceAll("&", "§");
+        final String COMMAND_PREFIX = Objects.requireNonNull(this.config.getString("prefix")).replaceAll("&", "§");
         return (COMMAND_PREFIX + this.config.getString(s)).replaceAll("<l>", "¡").replaceAll("&", "§").replaceAll("-,-", "ñ");
     }
 
@@ -154,7 +152,7 @@ public class Files {
         if (config.getString(s) == null) {
             return "";
         }
-        final String COMMAND_PREFIX = this.config.getString("prefix").replaceAll("&", "§");
+        final String COMMAND_PREFIX = Objects.requireNonNull(this.config.getString("prefix")).replaceAll("&", "§");
         return (COMMAND_PREFIX + this.config.getString(s)).replaceAll("<l>", "¡").replaceAll("&", "§").replaceAll("-,-", "ñ");
     }
 

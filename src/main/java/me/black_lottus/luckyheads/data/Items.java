@@ -22,6 +22,7 @@ public class Items {
     public static ItemStack itemStack(Material material, String name, List<String> lore){
         ItemStack i = new ItemStack(material, 1);
         ItemMeta meta = i.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(name);
         if(lore != null) {
             lore.replaceAll(s -> s.replace("&","§"));
@@ -40,6 +41,7 @@ public class Items {
     public static ItemStack createWand() {
         ItemStack a = new ItemStack(lang.getMaterial("wand.material"), 1);
         ItemMeta meta = a.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(lang.getWithoutPrefix("wand.name"));
         meta.setLore(lang.getList("wand.lore"));
         a.setItemMeta(meta);

@@ -9,6 +9,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class RemoveIdCMD extends CommandInterface {
 
     private final LuckyHeads plugin = LuckyHeads.getInstance();
@@ -40,7 +42,7 @@ public class RemoveIdCMD extends CommandInterface {
             Data.recalcTotalHeads(playerOffline.getUniqueId()); // Re calc values from Memory!
 
             // Send Messages to complete removeID!
-            player.sendMessage(lang.get("id_player_removed").replace("%id%",""+id).replace("%player%",playerOffline.getName()));
+            player.sendMessage(lang.get("id_player_removed").replace("%id%",""+id).replace("%player%", Objects.requireNonNull(playerOffline.getName())));
 
         } catch (NumberFormatException e) {
             player.sendMessage(lang.get("invalid_id"));

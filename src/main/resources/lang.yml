@@ -25,10 +25,10 @@ prefix: "&b&lLuckyHeads &f>> "
 ##################################################################
 ##                       GENERAL MESSAGES                       ##
 ##################################################################
-only_player: "&bEste comando solo los jugadores pueden ejecutarlo."
-no_perms: "No tienes permisos suficientes."
-collect_head: "Has encontrado una cabeza."
-already_collected: "Ya has encontrado esta cabeza anteriormente."
+only_player: "&bThis command it's only for players!"
+no_perms: "You don't have permissions to do this!"
+collect_head: "Wow! You found a Lucky Head!"
+already_collected: "You already found this head!"
 
 ##################################################################
 ##                       COMMANDS MESSAGES                      ##
@@ -40,34 +40,34 @@ wand:
   lore:
     - "&8Wand usage"
     - ""
-    - "&fUtiliza el &aBotón Derecho &fpara"
-    - "&festablecer una nueva posición"
-    - "&fy luego utiliza &b/luckyheads add <id>"
-    - "&fpara guardarla."
+    - "&fUse the &aLeft Click &ffor"
+    - "&fset a new head location"
+    - "&fand then type &b/luckyheads add <id>"
+    - "&fto save it on storage."
 
-already_have_wand: "Ya tienes una Wand en el inventario."
-get_wand: "Has obtenido la varita de configuración."
-cant_use_wand: "No puedes utilizar este item. Lo vamos a eliminar!"
-block_selected: "Seleccionado el Bloque: %X%x %Y%y %Z%z"
-already_block_selected: "Ya tienes seleccionada esta coordenada."
+already_have_wand: "You already have a config wand on your inventory!"
+get_wand: "You have been claim a config wand!"
+cant_use_wand: "You can't use this wand. Removing from your inventory."
+block_selected: "Block: %X%x %Y%y %Z%z"
+already_block_selected: "You have already set this coord!"
 
 # Add Heads Command
-id_already_exists: "Esta ID ya existe. Utiliza otra."
-coord_already_exists: "Esta cordenada ya existe. Con la id: %id%"
-coord_added: "Coordenada guardada."
-not_coord_set: "No has establecido las coordenadas con la Wand!"
-invalid_id: "Introduce un valor numérico!"
+id_already_exists: "This ID is already set! Please use another one."
+coord_already_exists: "This coord is already set. ID: %id%"
+coord_added: "You add a new coord!"
+not_coord_set: "You need to set wand coordinates before use this command!"
+invalid_id: "Please make sure to type a numeric value!"
 
 # Remove Heads Command
-id_not_exists: "No hay ninguna posición guardada con esa ID."
-coord_removed: "Has eliminado posición con id %id% del sistema."
+id_not_exists: "No one head ID for this ID saved on storage."
+coord_removed: "You removed head id %id% from system."
 
 # Remove Id Player Command
-id_player_removed: "Se ha eliminado la id %id% del jugador %player% del sistema."
+id_player_removed: "We remove the head id %id% for the player %player% from storage."
 
 # Remove Player Data Heads Command
-player_not_exists: "Este jugador no existe. ¿Es correcto el nombre?"
-data_removed: "Los datos del jugador %player% se han eliminado del sistema."
+player_not_exists: "This player don't exists. Are you sure?"
+data_removed: "Player data for %player% remove from system!"
 
 # Help Command
 help_message:
@@ -78,16 +78,16 @@ help_message:
   - ""
   - "&f&lComandos disponibles:"
   - ""
-  - "&f - &b/luckyheads wand &8: &fObtener la varita de configuración."
-  - "&f - &b/luckyheads add &e<id> &8: &fAñade una nueva cabeza."
-  - "&f - &b/luckyheads remove  &e<id> &8: &fElimina la cabeza seleccionada."
-  - "&f - &b/luckyheads list &8: &fMuestra todas las cabezas y su ubicación."
-  - "&f - &b/luckyheads help &8: &fMuestra los comandos disponibles."
-  - "&f - &b/luckyheads removeData &e<player> &8: &fEliminar datos del jugador."
-  - "&f - &b/luckyheads removeId &e<id> <player> &8: &fElimina la cabeza especificada al jugador."
+  - "&f - &b/luckyheads wand &8: &fClaim a config wand."
+  - "&f - &b/luckyheads add &e<id> &8: &fAdds a new head."
+  - "&f - &b/luckyheads remove  &e<id> &8: &fRemove the specific head."
+  - "&f - &b/luckyheads list &8: &fGUI list for all current heads saved."
+  - "&f - &b/luckyheads help &8: &fDisplay the command help list."
+  - "&f - &b/luckyheads removeData &e<player> &8: &fDelete player data."
+  - "&f - &b/luckyheads removeId &e<id> <player> &8: &fDelete the specific head to the specific player."
   - ""
 
-cmd_usage: "Uso correcto: %cmd%"
+cmd_usage: "Correct Usage: %cmd%"
 
 # List Heads Command
 list_gui:
@@ -106,6 +106,6 @@ list_gui:
     - ""
     - "&eClick here to teleport!"
 
-teleport_head: "Has sido teletransportado hasta la ubicación."
-no_heads_list: "No hay todavía ninguna posición establecida para las cabezas."
-list_heads: "Mostrando menú con todas las posiciones..."
+teleport_head: "You have been teleport to the lucky head location."
+no_heads_list: "We don't have already coord setted on the storage."
+list_heads: "Displaying menu List."

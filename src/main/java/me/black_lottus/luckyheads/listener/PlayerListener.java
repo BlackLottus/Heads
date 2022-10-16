@@ -5,7 +5,6 @@ import me.black_lottus.luckyheads.data.Data;
 import me.black_lottus.luckyheads.data.Methods;
 import me.black_lottus.luckyheads.data.Permissions;
 import me.black_lottus.luckyheads.file.Files;
-import me.black_lottus.luckyheads.utils.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -20,6 +19,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PlayerListener implements Listener {
 
@@ -47,8 +47,8 @@ public class PlayerListener implements Listener {
                         Data.recalcTotalHeads(p.getUniqueId()); // Add to memory total heads!
                         Methods.sendClaimSound(p, e.getClickedBlock().getLocation());
                         Methods.sendTitle("titles.collect-head.enable",p, // Send Title if is Enabled in Config.
-                                ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("titles.collect-head.title")),
-                                ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("titles.collect-head.subtitle")));
+                                ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("titles.collect-head.title"))),
+                                ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("titles.collect-head.subtitle"))));
                         // Send messages
                         if(plugin.getConfig().getBoolean("broadcasts.collect-head.enable")){
                             Bukkit.getOnlinePlayers().stream().toList().forEach(pl -> pl.sendMessage(lang.getWithoutPrefix("prefix") +

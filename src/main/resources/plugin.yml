@@ -1,5 +1,6 @@
 name: LuckyHeads
 version: '${project.version}'
+api-version: 1.16
 main: me.black_lottus.luckyheads.LuckyHeads
 authors: [ Black_Lottus ]
 description: Plugin to find heads and save data!
