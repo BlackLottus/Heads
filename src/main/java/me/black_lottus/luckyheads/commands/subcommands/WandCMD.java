@@ -8,6 +8,7 @@ import me.black_lottus.luckyheads.file.Files;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class WandCMD extends CommandInterface {
 
@@ -23,7 +24,7 @@ public class WandCMD extends CommandInterface {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if(Arrays.stream(player.getInventory().getContents()).toList().contains(Data.getWand())){
+        if(Arrays.stream(player.getInventory().getContents()).collect(Collectors.toList()).contains(Data.getWand())){
             player.sendMessage(lang.get("already_have_wand"));
             return;
         }

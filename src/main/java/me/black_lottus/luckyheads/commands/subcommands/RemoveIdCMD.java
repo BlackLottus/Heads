@@ -9,7 +9,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class RemoveIdCMD extends CommandInterface {
 
@@ -28,7 +30,7 @@ public class RemoveIdCMD extends CommandInterface {
         int id;
         try {
             id = Integer.parseInt(args[1]); // Check if id is a valid number!
-            if(!Data.getLocations().values().stream().toList().contains(id)){ // Check if head locations contains this ID
+            if(!new ArrayList<>(Data.getLocations().values()).contains(id)){ // Check if head locations contains this ID
                 player.sendMessage(lang.get("id_not_exists")); // If not contains, send message invalid ID!
                 return;
             }

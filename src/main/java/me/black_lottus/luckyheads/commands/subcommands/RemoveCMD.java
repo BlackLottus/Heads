@@ -10,6 +10,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 public class RemoveCMD extends CommandInterface {
 
     private final LuckyHeads plugin = LuckyHeads.getInstance();
@@ -27,7 +30,7 @@ public class RemoveCMD extends CommandInterface {
         int id;
         try {
             id = Integer.parseInt(args[1]); // Check if id is a valid number!
-            if(!Data.getLocations().values().stream().toList().contains(id)){ // Check if head locations contains this ID
+            if(!new ArrayList<>(Data.getLocations().values()).contains(id)){ // Check if head locations contains this ID
                 player.sendMessage(lang.get("id_not_exists")); // If not contains, send message invalid ID!
                 return;
             }
@@ -37,7 +40,7 @@ public class RemoveCMD extends CommandInterface {
                     Data.getLocations().remove(loc); // Remove from Memory!
                     // Messages to complete REMOVE Head!
                     if(plugin.getConfig().getBoolean("broadcasts.remove-head.enable")){ // Check if broadcast is enabled!
-                        Bukkit.getOnlinePlayers().stream().toList().forEach(p -> p.sendMessage(lang.getWithoutPrefix("prefix") +
+                        Bukkit.getOnlinePlayers().stream().collect(Collectors.toList()).forEach(p -> p.sendMessage(lang.getWithoutPrefix("prefix") +
                                 plugin.getConfig().getString("broadcasts.remove-head.message").replace("&", "§")
                                         .replace("%id%",""+id)));
                     }else player.sendMessage(lang.get("coord_removed").replace("%id%",""+id));

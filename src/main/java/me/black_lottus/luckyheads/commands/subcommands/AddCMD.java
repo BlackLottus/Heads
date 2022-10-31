@@ -11,6 +11,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 public class AddCMD extends CommandInterface {
 
     private final LuckyHeads plugin = LuckyHeads.getInstance();
@@ -27,7 +30,7 @@ public class AddCMD extends CommandInterface {
         int id;
         try {
             id = Integer.parseInt(args[1]); // Check if id is a valid number!
-            if(Data.getLocations().values().stream().toList().contains(id)){ // Check if head locations contains this ID
+            if(new ArrayList<>(Data.getLocations().values()).contains(id)){ // Check if head locations contains this ID
                 player.sendMessage(lang.get("id_already_exists")); // If  contains, send message invalid ID -->> Already TAKE!
                 return;
             }
@@ -48,7 +51,7 @@ public class AddCMD extends CommandInterface {
 
                 // Messages to complete ADD Head!
                 if(plugin.getConfig().getBoolean("broadcasts.add-head.enable")){ // Check if broadcast is enabled!
-                    Bukkit.getOnlinePlayers().stream().toList().forEach(p -> p.sendMessage(lang.getWithoutPrefix("prefix") +
+                    Bukkit.getOnlinePlayers().stream().collect(Collectors.toList()).forEach(p -> p.sendMessage(lang.getWithoutPrefix("prefix") +
                             plugin.getConfig().getString("broadcasts.add-head.message").replace("&", "§")
                                     .replace("%id%",""+id)));
                 }else player.sendMessage(lang.get("coord_added"));
