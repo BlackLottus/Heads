@@ -6,7 +6,7 @@
 
     <groupId>me.black_lottus</groupId>
     <artifactId>LuckyHeads</artifactId>
-    <version>1.5.1 ALPHA</version>
+    <version>1.5.5 BETA</version>
     <packaging>jar</packaging>
 
     <name>Heads</name>

@@ -33,7 +33,7 @@ public class PlayerListener implements Listener {
         //                COLLECT HEAD                */
         // *******************************************/
 
-        if(e.getAction() == Action.LEFT_CLICK_BLOCK) {
+        if(e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if(p.hasPermission(Permissions.COLLECT_PERM)){
                 if(Data.getLocations().containsKey(e.getClickedBlock().getLocation())){
                     int id = Data.getLocations().get(e.getClickedBlock().getLocation());

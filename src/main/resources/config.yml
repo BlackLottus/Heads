@@ -15,7 +15,7 @@
 ####################################################
 #This version is the configuration version, not the plugin version.
 #Don't edit this if you don't know what are you doing!
-version: 1.5.1 ALPHA
+version: 1.5.5 BETA
 
 ####################################################
 ###               STORAGE SETTINGS               ###

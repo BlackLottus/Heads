@@ -125,7 +125,7 @@ public class Effects {
                         // if some player have some head to claim, remove from List and then display effect to others!
                         if(Data.getPlayerHeads().get(uuid).contains(Data.getLocations().get(loc))) onlinePlayers.remove(Bukkit.getPlayer(uuid));
                     }
-                    canCollect(loc, onlinePlayers);
+                    canCollect(new Location(loc.getWorld(),loc.getBlockX(),loc.getBlockY(),loc.getBlockZ()), onlinePlayers);
                 }
             }
         }.runTaskTimerAsynchronously(LuckyHeads.getInstance(), 0L, 20L); // Task 20L = 1 sec!

@@ -5,6 +5,7 @@ import me.black_lottus.luckyheads.LuckyHeads;
 import me.black_lottus.luckyheads.data.Data;
 import me.black_lottus.luckyheads.data.Items;
 import me.black_lottus.luckyheads.file.Files;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -42,7 +43,14 @@ public class Inventories {
             // Add an element to the group
             // Elements are in the order they got added to the group and don't need to have the same type.
             //group.addElement((new StaticGuiElement('e', new ItemStack(Material.CHEST), Data.clans.get(text).getClanName())));
-            String id = Data.getLocations().get(loc).toString(); // Gets id from Locations HashMap.
+
+            String id; // Gets id from Locations HashMap.
+            if(Data.getLocations().get(loc) != null){
+                id = Data.getLocations().get(loc).toString();
+            }else{
+                id = "null";
+            }
+
             group.addElement(new StaticGuiElement('e',
                     Items.itemStack(Material.valueOf(plugin.getConfig().getString("material-list-items")), lang.getWithoutPrefix("list_gui.item_name").replace("%id%", id), lore(loc)), 1, // Display a number as the item count
                     click -> { // Create click event for cancel clicks and move items.
